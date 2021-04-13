@@ -40,7 +40,7 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 # Create a runner script for the entrypoint
 COPY runner.sh /runner.sh
-RUN chmod +x /runner.sh
+RUN chgrp 0 /runner.sh && chmod g=u /runner.sh
 
 # Expose ports
 EXPOSE 8088
