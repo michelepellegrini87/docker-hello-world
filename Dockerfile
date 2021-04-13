@@ -44,9 +44,10 @@ RUN chgrp 0 /runner.sh && chmod g=u /runner.sh
 
 # Expose ports
 EXPOSE 8088
-USER 1001
 
 ENTRYPOINT ["/runner.sh"]
+
+USER 1001
 
 # Set the default command to execute
 # when creating a new container
