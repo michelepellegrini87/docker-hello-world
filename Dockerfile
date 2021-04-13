@@ -24,12 +24,12 @@ RUN apt-get install -y vim wget dialog net-tools
 RUN apt-get install -y nginx
 
 # Remove the default Nginx configuration file
-RUN rm -v /etc/nginx/nginx.conf
+RUN chgrp -R 0 /etc/nginx && chmod -R g=u /etc/nginx && rm -v /etc/nginx/nginx.conf
 
 # Copy a configuration file from the current directory
 ADD nginx.conf /etc/nginx/
 
-RUN mkdir /etc/nginx/logs
+RUN mkdir /etc/nginx/logs && chgrp -R 0 /www/data && chmod -R g=u /www/data
 
 # Add a sample index file
 ADD index.html /www/data/
@@ -42,7 +42,8 @@ COPY runner.sh /runner.sh
 RUN chmod +x /runner.sh
 
 # Expose ports
-EXPOSE 80
+EXPOSE 8088
+USER 1001
 
 ENTRYPOINT ["/runner.sh"]
 
