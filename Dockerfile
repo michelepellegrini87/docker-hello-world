@@ -29,7 +29,7 @@ RUN chgrp -R 0 /etc/nginx && chmod -R g=u /etc/nginx && rm -v /etc/nginx/nginx.c
 # Copy a configuration file from the current directory
 ADD nginx.conf /etc/nginx/
 
-RUN mkdir /etc/nginx/logs
+RUN mkdir /etc/nginx/logs && chgrp -R 0 /etc/nginx/logs && chmod -R g=u /etc/nginx/logs
 
 # Add a sample index file
 ADD index.html /www/data/
